@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Notes Sharing</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <header>
+        <h1>📚 Student Notes Sharing Website</h1>
+        <p>Share, search and download study notes easily.</p>
+    </header>
+
+    <section>
+        <h2>📖 Subjects</h2>
+
+        <div class="subjects">
+            <button>Programming</button>
+            <button>Database</button>
+            <button>Network</button>
+            <button>Operating System</button>
+        </div>
+    </section>
+
+    <section>
+        <h2>🔍 Search Notes</h2>
+
+        <input type="text" id="search" placeholder="Search notes...">
+        <button onclick="searchNotes()">Search</button>
+    </section>
+
+    <section>
+        <h2>📄 Available Notes</h2>
+
+  <div id=”uploadedNotes“></div>      <div class="note">
+            <h3>Programming Notes</h3>
+            <p>Basic programming concepts and examples.</p>
+    <button onclick="alert('Programming Notes: Basic programming concepts and examples.')">View Notes</button>
+         <a href="programming.txt" download>
+  <button>Download</button>
+</a>   
+        </div>
+
+        <div class="note">
+            <h3>Database Notes</h3>
+            <p>Introduction to database and SQL.</p>
+        <button onclick="alert('Database Notes: Introduction to database and SQL.')">View Notes</button>    
+          <a href="database.txt" download>
+  <button>Download</button>
+</a>  
+        </div>
+
+        <div class="note">
+            <h3>Computer Network Notes</h3>
+            <p>Basic networking concepts.</p>
+           <button onclick="alert('Computer Network Notes: Basic networking concepts.')"">View Notes</button>
+<a href=”network.txt“ download>
+  <button>Download</button>
+</a> 
+        
+        </div>
+
+    </section>
+
+    <section>
+        <h2>⬆️ Upload Notes</h2>
+
+      <input type="file" id="noteFile" accept=".pdf,.ppt,.pptx,.doc,.docx">  
+
+      <button onclick="uploadNote()">Upload</button>  
+     <div id="uploadedNotes"s></div>
+    </section>
+
+</div>
+
+<script>
+    function searchNotes() {
+    let search = document.getElementById("search").value.toLowerCase().trim();
+    let notes = document.querySelectorAll(".note");
+
+    notes.forEach(function(note) {
+        let text = note.innerText.toLowerCase();
+
+        if (text.includes(search)) {
+            note.style.display = "block";
+        } else {
+            note.style.display = "none";
+        }
+    });
+}
+function uploadNote() {
+    let file = document.getElementById("noteFile").files[0];
+
+    if (file) {
+      let notes = document.getElementById("uploadedNotes");
+
+let div = document.createElement("div");
+div.className = "note";
+
+let title = document.createElement("h3");
+title.textContent = file.name;
+
+div.appendChild(title);
+let url = URL.createObjectURL(file);
+
+let view = document.createElement("a");
+view.href = url;
+view.target = "_blank";
+view.textContent = "View Notes";
+div.appendChild(view);
+
+let download = document.createElement("a");
+download.href = url;
+download.download = file.name;
+download.textContent = "Download";
+div.appendChild(download);
+notes.appendChild(div);
+
+alert("Note added successfully!");
+    } else {  
+        alert("Please choose a file first!");
+    }
+}
+</script>
+
+</body>
+</html>

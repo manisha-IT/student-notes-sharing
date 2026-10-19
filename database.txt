@@ -1,0 +1,3 @@
+Database Notes
+Introduction to database and SQL.
+Tables, rows, columns, and SQL queries.
